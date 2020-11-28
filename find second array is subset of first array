@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	//code
+		int t;
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    int m,n,cnt=0;
+	    cin>>m>>n;
+	    int a[m],b[n];
+	    for(int i=0;i<m;i++)
+	    {
+	        cin>>a[i];
+	    }
+	     for(int i=0;i<n;i++)
+	    {
+	        cin>>b[i];
+	    }
+	    for(int i=0;i<n;i++)
+	    {
+	      int k=b[i];
+	      for(int j=0;j<m;j++)
+	      {
+	          if(k==a[j])
+	          {
+	              cnt++;
+	          }
+	          
+	      }
+	    }
+	    if(cnt==n)
+	    {
+	        cout<<"Yes"<<endl;
+	    }
+	    else
+	    {
+	        cout<<"No"<<endl;
+	    }
+	}
+	
+	   
+	
+	return 0;
+}
