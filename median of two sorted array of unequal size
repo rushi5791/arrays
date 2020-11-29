@@ -1,0 +1,111 @@
+Input: ar1[] = {-5, 3, 6, 12, 15}
+        ar2[] = {-12, -10, -6, -3, 4, 10}
+Output : The median is 3.
+Explanation : The merged array is :
+        ar3[] = {-12, -10, -6, -5 , -3,
+                 3, 4, 6, 10, 12, 15},
+       So the median of the merged array is 3
+
+Input: ar1[] = {2, 3, 5, 8}
+        ar2[] = {10, 12, 14, 16, 18, 20}
+Output : The median is 11.
+Explanation : The merged array is :
+        ar3[] = {2, 3, 5, 8, 10, 12, 14, 16, 18, 20}
+        if the number of the elements are even, 
+        so there are two middle elements,
+        take the average between the two :
+        (10 + 12) / 2 = 11.      
+Method 1: This method uses a linear and simpler approach.
+
+Approach: The given arrays are sorted, so merge the sorted arrays in an efficient way and keep the count of elements inserted in the output array or printed form. So when the elements in the output array are half the original size of the given array print the element as a median element. There are two cases:
+Case 1: m+n is odd, the median is at (m+n)/2 th index in the array obtained after merging both the arrays.
+Case 2: m+n is even, the median will be average of elements at index ((m+n)/2 – 1) and (m+n)/2 in the array obtained after merging both the arrays
+Algorithm:
+Given two arrays are sorted. So they can be merged in O(m+n) time. Create a variable count to have a count of elements in the output array.
+If the value of (m+n) is odd then there is only one median else the median is the average of elements at index (m+n)/2 and ((m+n)/2 – 1).
+To merge the both arrays, keep two indices i and j initially assigned to 0. Compare the ith index of 1st array and jth index of second, increase the index of the smallest element and increase the count.
+Check if the count reached (m+n) / 2 if (m+n) is odd and store the element, if even store the average of (m+n)/2 th and (m+n)/2 -1 th element and print it.
+Implementation:
+filter_none
+edit
+play_arrow
+
+brightness_4
+// A Simple Merge based O(n) solution to find  
+// median of two sorted arrays  
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+/* This function returns median of ar1[] and ar2[].  
+Assumption in this function:  
+Both ar1[] and ar2[] are sorted arrays */
+int getMedian(int ar1[], int ar2[], int n, int m)  
+{  
+    int i = 0; /* Current index of input array ar1[] */
+    int j = 0; /* Current index of input array ar2[] */
+    int count;  
+    int m1 = -1, m2 = -1;  
+  
+    // Since there are (n+m) elements,  
+    // There are following two cases  
+    // if n+m is odd then the middle  
+    //index is median i.e. (m+n)/2  
+    if((m + n) % 2 == 1)  
+    {  
+        for (count = 0; count <= (n + m)/2; count++) 
+        {  
+            if(i != n && j != m) 
+            {  
+                m1 = (ar1[i] > ar2[j]) ? ar2[j++] : ar1[i++];  
+            }  
+            else if(i < n) 
+            {  
+                m1 = ar1[i++];  
+            }  
+            // for case when j<m,  
+            else
+            {  
+                m1 = ar2[j++];  
+            }  
+        }  
+        return m1;  
+    }  
+      
+    // median will be average of elements  
+    // at index ((m+n)/2 - 1) and (m+n)/2  
+    // in the array obtained after merging ar1 and ar2  
+    else 
+    {  
+        for (count = 0; count <= (n + m)/2; count++)  
+        {  
+            m2 = m1;  
+            if(i != n && j != m) 
+            {  
+                m1 = (ar1[i] > ar2[j]) ? ar2[j++] : ar1[i++];  
+            }  
+            else if(i < n) 
+            {  
+                m1 = ar1[i++];  
+            }  
+            // for case when j<m,  
+            else
+            {  
+                m1 = ar2[j++];  
+            }  
+        }  
+        return (m1 + m2)/2;  
+    }  
+}  
+  
+/* Driver code */
+int main()  
+{  
+    int ar1[] = {900};  
+    int ar2[] = {5, 8, 10, 20};  
+  
+    int n1 = sizeof(ar1)/sizeof(ar1[0]);  
+    int n2 = sizeof(ar2)/sizeof(ar2[0]);  
+    cout << getMedian(ar1, ar2, n1, n2);  
+    return 0;  
+}  
+  
