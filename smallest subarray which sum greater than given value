@@ -1,3 +1,4 @@
+
 // O(n) solution for finding smallest subarray with sum 
 // greater than x 
 #include <iostream> 
